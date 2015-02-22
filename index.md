@@ -1,3 +1,10 @@
+---
+layout: page
+title: grid studies supercollider
+permalink: /docs/grid-studies/sc/
+published: true
+---
+
 # Grid Studies: SuperCollider
 
 By design the monome grid does nothing on it's own. You the user assign it purpose and meaning: instrument, experiment, tool, toy... choose your own adventure. This grid is *intended* to be reimagined. Here we set forth to impart some introductory knowledge: potential energy for radical creative freedom.
