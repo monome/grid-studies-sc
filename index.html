@@ -1,0 +1,812 @@
+<!DOCTYPE html><html>
+
+<head>
+<meta charset="utf-8">
+<title>Grid Studies: SuperCollider</title>
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+<style type="text/css">
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', monospace;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+</head>
+<body>
+<h1 id="toc_0">Grid Studies: SuperCollider</h1>
+
+<p>By design the monome grid does nothing on it&#39;s own. You the user assign it purpose and meaning: instrument, experiment, tool, toy... choose your own adventure. This grid is <em>intended</em> to be reimagined. Here we set forth to impart some introductory knowledge: potential energy for radical creative freedom.</p>
+
+<p>SuperCollider is an environment and programming language for real time audio synthesis and algorithmic composition. It provides an interpreted object-oriented language which functions as a network client to a state of the art, realtime sound synthesis server.</p>
+
+<h2 id="toc_1">Prerequisites</h2>
+
+<p>If you&#39;re very new to SuperCollider, it will be very beneficial to work through the &#39;Getting Started&#39; tutorial which is within SuperCollider&#39;s help file documentation.</p>
+
+<p>Download SuperCollider: <a href="http://supercollider.sourceforge.net/">supercollider.sourceforge.net</a></p>
+
+<p>Download the monome installer: <a href="http://monome.org/docs/begin">monome.org/docs/begin</a></p>
+
+<p>Download the code examples here: <a href="github.com/monome/grid-studies-sc/releases/latest">github.com/monome/grid-studies-sc/releases/latest</a></p>
+
+<h2 id="toc_2">Library Setup</h2>
+
+<p>Download the monom library:</p>
+
+<p><a href="https://github.com/catfact/monom/archive/master.zip">github.com/catfact/monom/archive/master.zip</a></p>
+
+<p>Copy to library to your SuperCollider class library folder:</p>
+
+<ul>
+<li>MacOSX: right click on SuperCollider.app, choose “Show Package Contents” and then navigate to &#39;Contents/Resources/SCClassLibrary&#39;</li>
+<li>Windows: &#39;SCClassLibrary&#39; within the SuperCollider program folder</li>
+<li>Linux: look in /usr/share/SuperCollider/</li>
+</ul>
+
+<h2 id="toc_3">1. Connect</h2>
+
+<p>The monom library facilitates easy connection and communication with grids. Connect to a grid with the following code:</p>
+
+<pre><code>~m = MonoM.new(&quot;/monome&quot;, 0);
+// ...
+~m.useDevice(0);</code></pre>
+
+<p>Here the first monome device found is attached. There needs to be a slight delay in between initalizing the new device and connecting to it. Starting up the server works fine:</p>
+
+<pre><code>~m = MonoM.new(&quot;/monome&quot;, 0);
+
+s.waitForBoot({
+
+~m.useDevice(0);</code></pre>
+
+<p>The arguments to the initializer are prefix and grid rotation.</p>
+
+<p>The library communicates with <em>serialosc</em> to discover attached devices using OSC. For a detailed description of how the mechanism and protocol work, see <a href="http://monome.org/docs/tech:osc">monome.org/docs/tech:osc</a>.</p>
+
+<h2 id="toc_4">2. Basics</h2>
+
+<p><em>See grid-studies-2.scd for this section.</em></p>
+
+<p><img src="images/grid-studies-sc-2.png" alt=""></p>
+
+<h3 id="toc_5">2.1 Key input</h3>
+
+<p>We read grid key input by creating an OSC responder. Three parameters are received, in order:</p>
+
+<pre><code>x : horizontal position (0-15)
+y : vertical position (0-7)
+s : state (1 = key down, 0 = key up)</code></pre>
+
+<p>Below we define the function and simply print out incoming data.</p>
+
+<pre><code>OSCFunc.newMatching(
+        { arg message, time, addr, recvPort;
+            message.postln;
+        }, &quot;/monome/grid/key&quot;);</code></pre>
+
+<p><code>/monome/grid/key</code> is the OSC pattern this function responds to. We can later pull apart <code>message</code> to use the <code>x</code>, <code>y</code>, and <code>s</code>.</p>
+
+<h3 id="toc_6">2.2 LED output</h3>
+
+<p>Updating a single LED takes the form:</p>
+
+<pre><code>~m.ledset(x, y, s);</code></pre>
+
+<p>Where <code>s</code> ranges from 0 (off) to 15 (full brightness) with variable levels in between.</p>
+
+<h3 id="toc_7">2.3 Coupled interaction</h3>
+
+<p>Instead of printing the key output, we can show the key state on the grid quite simply:</p>
+
+<pre><code>OSCFunc.newMatching(
+        { arg message, time, addr, recvPort;
+            ~m.ledset(message[1], message[2], message[3]);
+        }, &quot;/monome/grid/key&quot;);
+
+});</code></pre>
+
+<h3 id="toc_8">2.4 Decoupled interaction</h3>
+
+<p><em>See grid-studies-2-4.scd for this step.</em></p>
+
+<p>The most basic decoupled interaction is a toggle. Turn the grid into a huge bank of toggles by first creating an Array to store data. It needs to be the same size as our grid. We&#39;ll call this <code>step</code> and initialize it full of zeros.</p>
+
+<pre><code>~step = Array.fill(128, {0});</code></pre>
+
+<p>Now we need our key input code to switch the states. Instead of updating a single LED, we do this:</p>
+
+<pre><code>if(message[3] == 1, {
+                var pos = message[1] + (message[2] * 16);
+                if(~step[pos] == 1,
+                    {~step[pos] = 0},
+                    {~step[pos] = 1}
+                );
+                d.value;
+            })</code></pre>
+
+<p><code>message[3]</code> is the key state (down or up). Here we do something only on key down (value == 1). We calculate the position, and then change the value of the <code>step</code> based on its previous state.</p>
+
+<p>We refresh the grid in function <code>d</code> which is executed with <code>d.value;</code>:</p>
+
+<pre><code>d = {
+        for(0,7, {arg y;
+            for(0,15, {arg x;
+                ~m.levset(x,y,~step[y*16+x] * 15);
+            })
+        })
+    };</code></pre>
+
+<p>Here we traverse the array, updating each LED in according to its value. We multiply by 15 which gives us 0 (off) or 15 (full brightness) per position.</p>
+
+<h2 id="toc_9">3. Further</h2>
+
+<p>Now we&#39;ll show how basic grid applications are developed by creating a step sequencer. We will add features incrementally:</p>
+
+<ul>
+<li>Use the top six rows as toggles.</li>
+<li>Generate a clock pulse to advance the playhead from left to right, one column at a time. Wrap back to 0 at the end.</li>
+<li>Display the play head on &quot;position&quot; (last) row.</li>
+<li>Indicate the &quot;activity&quot; row (second to last) with a low brightness.</li>
+<li>Trigger an event when the playhead reads an &quot;on&quot; toggle. Our &quot;event&quot; will be to turn on the corresponding LED in the &quot;activity&quot; row.</li>
+<li>Jump to playback position when key pressed in the position row.</li>
+<li>Adjust playback loop with two-key gesture in position row.</li>
+</ul>
+
+<h3 id="toc_10">3.1 Toggles</h3>
+
+<p>We already have a full bank of toggles set up. Let&#39;s shrink down the bank to just the top 6 rows. First <code>step</code> can be reduced to 96 elements. And then we&#39;ll adjust the key detection so toggling only happens if <code>y</code> is less than 6:</p>
+
+<pre><code>    if((message[3] == 1) &amp;&amp; (message[2] &lt; 6), {
+        var pos = message[1] + (message[2] * 16);
+        if(~step[pos] == 1,
+            {~step[pos] = 0},
+            {~step[pos] = 1}
+        );
+        d.value;
+    });</code></pre>
+
+<p>That will get us started.</p>
+
+<h3 id="toc_11">3.2 Play</h3>
+
+<p><em>See grid-studies-3-2.scd for this step.</em></p>
+
+<p>Let&#39;s make a timer routine that moves a virtual playhead.</p>
+
+<pre><code>t = Routine({
+    var interval = 0.125;
+    loop {
+        if(~play_position == 15,
+                {~play_position = 0;},
+                {~play_position = ~play_position + 1;}
+            );
+
+        d.value;
+
+        interval.yield;
+    }
+
+});
+
+t.play();</code></pre>
+
+<p>This routine runs at a timing interval specified by the variable <code>interval</code>. The <code>play_position</code> is advanced, rolling back to 0 after 15. We redraw the grid each time the play head moves.</p>
+
+<p>For the redraw we add highlighting for the play position. Note how the multiply by 15 has been decreased to 11 to provide another mid-level brightness. We now have a series of brightness levels helping to indicate playback, lit keys, and currently active keys:</p>
+
+<pre><code>d = {
+        var highlight;
+        for(0,15, {arg x;
+            if(x==~play_position,
+                    {highlight = 1},
+                    {highlight = 0});
+
+            for(0,5, {arg y;
+                ~m.levset(x,y,(~step[y*16+x] * 11) + (highlight * 4));
+            });
+        })
+    };</code></pre>
+
+<p>During this loop which copies steps to the grid, we check if we&#39;re updating a column that is the play position. If so, we increase the highlight value. By adding this value during the copy we&#39;ll get a nice effect of an overlaid translucent bar.</p>
+
+<h3 id="toc_12">3.3 Triggers</h3>
+
+<p><em>See grid-studies-3-3.scd for this step.</em></p>
+
+<p>When the playhead advances to a new row we want something to happen which corresponds to the toggled-on rows. We&#39;ll do two things: we&#39;ll show separate visual feedback on the grid in the second-to-last (trigger) row, and we&#39;ll make a sound.</p>
+
+<p>Drawing the trigger row happens in <code>d</code>:</p>
+
+<pre><code>d = {
+        var highlight;
+        for(0,15, {arg x;
+            if(x==~play_position,
+                    {highlight = 1},
+                    {highlight = 0});
+
+            for(0,5, {arg y;
+                ~m.levset(x,y,(~step[y*16+x] * 11) + (highlight * 4));
+            });
+
+            // set trigger row background
+            ~m.levset(x,6,4);
+        });
+
+        // show triggers
+        for(0,5, {arg t;
+            if(~step[(t*16) + ~play_position] == 1,
+                {~m.levset(t,6,15);}
+            )
+        })
+    };</code></pre>
+
+<p>First we create a dim row (level 4 is fairly dim). Then we search through the <code>step</code> array at the current play position, showing a bright indicator for each on state. This displays a sort of horizontal correlation of rows (or &quot;channels&quot;) 1-6 current state.</p>
+
+<p>And then trigger a sound, if the toggle is on, inside <code>t</code>:</p>
+
+<pre><code>// TRIGGER SOMETHING
+for(0,5, {arg t;
+    if(~step[(t*16) + ~play_position] == 1,
+            {Synth(\singrain, [freq: (5-t)*100+300, 
+                amp: rrand(0.1, 0.5), sustain: interval * 0.8]);}
+    )
+});</code></pre>
+
+<p>If <code>step</code> is 1 for at <code>play_position</code> we trigger a sound. The frequency corresponds to the row position.</p>
+
+<h3 id="toc_13">3.4 Cutting</h3>
+
+<p><em>See grid-studies-3-4.scd for this step.</em></p>
+
+<p>We will now use the bottom row to dynamically cut the playback position. First let&#39;s add a position display to the last row, which will be inside <code>d</code>:</p>
+
+<pre><code>// play position
+        ~m.levset(~play_position,7,15);</code></pre>
+
+<p>We clear this row first, a few lines prior.</p>
+
+<p>Now we look for key presses in the last row, in the key function:</p>
+
+<pre><code>OSCFunc.newMatching(
+        { arg message, time, addr, recvPort;
+
+            if((message[3] == 1) &amp;&amp; (message[2] &lt; 6), {
+                var pos = message[1] + (message[2] * 16);
+                if(~step[pos] == 1,
+                    {~step[pos] = 0},
+                    {~step[pos] = 1}
+                );
+            });
+
+            if((message[3] == 1) &amp;&amp; (message[2] == 7), {
+                ~next_position = message[1];
+                ~cutting = 1;
+            });
+        }, &quot;/monome/grid/key&quot;);</code></pre>
+
+<p>We&#39;ve added two variables, <code>cutting</code> and <code>next_position</code>. Check out the changed code where we check the timer:</p>
+
+<pre><code>if(~play_position == 15,
+        {~play_position = 0;},
+        {
+            if(~cutting == 1,
+                {~play_position = ~next_position; ~cutting = 0;},
+                {~play_position = ~play_position + 1;})
+        };
+    );</code></pre>
+
+<p>Now, when pressing keys on the bottom row it will cue the next position to be played. Note that we set <code>cutting = 0</code> after each cut so that each press only affects the timer once.</p>
+
+<h3 id="toc_14">3.5 Loop</h3>
+
+<p><em>See grid-studies-3-5.scd for this step.</em></p>
+
+<p>Lastly, we&#39;ll implement setting the loop start and end points with a two-press gesture: pressing and holding the start point, and pressing an end point while still holding the first key. We&#39;ll need to add a variable to count keys held, one to track the last key pressed, and variables to store the loop positions.</p>
+
+<pre><code>~keys_held = 0;
+~key_last = 0;
+~loop_start = 0;
+~loop_end = 15;</code></pre>
+
+<p>We count keys held on the bottom row thusly:</p>
+
+<pre><code>if(message[2] == 7,
+    if(message[3] == 1,
+        {~keys_held = ~keys_held + 1;},
+        {~keys_held = ~keys_held - 1;});
+);</code></pre>
+
+<p>We&#39;ll then use the <code>keys_held</code> counter to do different actions:</p>
+
+<pre><code>// loop and cut
+if((message[3] == 1) &amp;&amp; (message[2] == 7), {
+    if(~keys_held == 1, {
+        ~next_position = message[1];
+        ~cutting = 1;
+        ~key_last = message[1];
+        },
+        {
+            ~loop_start = ~key_last;
+            ~loop_end = message[1];
+            ~loop_end.postln;
+    });
+});</code></pre>
+
+<p>We then modify the position change code:</p>
+
+<pre><code>// update position
+if(~cutting == 1,
+        {~play_position = ~next_position; ~cutting = 0;},
+        {
+            if(~play_position == 15,
+                {~play_position = 0;},
+                {
+                    if(~play_position == ~loop_end,
+                        {~play_position = ~loop_start;},
+                        {~play_position = ~play_position + 1;});
+                }
+            );
+        };
+    );</code></pre>
+
+<p>Done!</p>
+
+<h2 id="toc_15">Closing</h2>
+
+<h3 id="toc_16">Suggested Excercises</h3>
+
+<ul>
+<li>&quot;Record&quot; keypresses in the &quot;trigger&quot; row to the toggle matrix.</li>
+<li>Display the loop range on the bottom row of the grid.</li>
+<li>Use the rightmost key in the &quot;trigger&quot; row as an &quot;alt&quot; key.
+
+<ul>
+<li>If &quot;alt&quot; is held while pressing a toggle, clear the entire row.</li>
+<li>If &quot;alt&quot; is held while pressing the play row, reverse the direction of play.</li>
+</ul></li>
+</ul>
+
+<h2 id="toc_17">Credits</h2>
+
+<p><em>Processing</em> was written by  James McCartney and is now maintained <a href="http://supercollider.sourceforge.net">as a GPL project by various people</a>.</p>
+
+<p><em>monom</em> was written by and is maintained by <a href="http://catfact.net">Ezra Buchla</a>.</p>
+
+<p>This tutorial was created by <a href="http://nnnnnnnn.org">Brian Crabtree</a> for <a href="monome.org">monome.org</a>. Huge thanks to Raja Das for his very extensive <a href="http://monome.org/docs/dev:supercollider_tutorial">Monoming with SuperCollider Tutorial</a>.</p>
+
+<p>Contributions welcome. Submit a pull request to <a href="https://github.com/monome/grid-studies-sc">github.com/monome/grid-studies-sc</a> or e-mail <a href="mailto:info@monome.org">info@monome.org</a>.</p>
+
+<script type="text/javascript">
+self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{};var Prism=function(){var e=/\blang(?:uage)?-(?!\*)(\w+)\b/i,t=self.Prism={util:{encode:function(e){return e instanceof n?new n(e.type,t.util.encode(e.content),e.alias):"Array"===t.util.type(e)?e.map(t.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},clone:function(e){var n=t.util.type(e);switch(n){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=t.util.clone(e[r]));return a;case"Array":return e.map(function(e){return t.util.clone(e)})}return e}},languages:{extend:function(e,n){var a=t.util.clone(t.languages[e]);for(var r in n)a[r]=n[r];return a},insertBefore:function(e,n,a,r){r=r||t.languages;var i=r[e];if(2==arguments.length){a=arguments[1];for(var l in a)a.hasOwnProperty(l)&&(i[l]=a[l]);return i}var o={};for(var s in i)if(i.hasOwnProperty(s)){if(s==n)for(var l in a)a.hasOwnProperty(l)&&(o[l]=a[l]);o[s]=i[s]}return t.languages.DFS(t.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,n,a){for(var r in e)e.hasOwnProperty(r)&&(n.call(e,r,e[r],a||r),"Object"===t.util.type(e[r])?t.languages.DFS(e[r],n):"Array"===t.util.type(e[r])&&t.languages.DFS(e[r],n,r))}},highlightAll:function(e,n){for(var a,r=document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'),i=0;a=r[i++];)t.highlightElement(a,e===!0,n)},highlightElement:function(a,r,i){for(var l,o,s=a;s&&!e.test(s.className);)s=s.parentNode;if(s&&(l=(s.className.match(e)||[,""])[1],o=t.languages[l]),o){a.className=a.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,s=a.parentNode,/pre/i.test(s.nodeName)&&(s.className=s.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var g=a.textContent;if(g){g=g.replace(/^(?:\r?\n|\r)/,"");var u={element:a,language:l,grammar:o,code:g};if(t.hooks.run("before-highlight",u),r&&self.Worker){var c=new Worker(t.filename);c.onmessage=function(e){u.highlightedCode=n.stringify(JSON.parse(e.data),l),t.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,i&&i.call(u.element),t.hooks.run("after-highlight",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code}))}else u.highlightedCode=t.highlight(u.code,u.grammar,u.language),t.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,i&&i.call(a),t.hooks.run("after-highlight",u)}}},highlight:function(e,a,r){var i=t.tokenize(e,a);return n.stringify(t.util.encode(i),r)},tokenize:function(e,n){var a=t.Token,r=[e],i=n.rest;if(i){for(var l in i)n[l]=i[l];delete n.rest}e:for(var l in n)if(n.hasOwnProperty(l)&&n[l]){var o=n[l];o="Array"===t.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var g=o[s],u=g.inside,c=!!g.lookbehind,f=0,h=g.alias;g=g.pattern||g;for(var p=0;p<r.length;p++){var d=r[p];if(r.length>e.length)break e;if(!(d instanceof a)){g.lastIndex=0;var m=g.exec(d);if(m){c&&(f=m[1].length);var y=m.index-1+f,m=m[0].slice(f),v=m.length,k=y+v,b=d.slice(0,y+1),w=d.slice(k+1),O=[p,1];b&&O.push(b);var N=new a(l,u?t.tokenize(m,u):m,h);O.push(N),w&&O.push(w),Array.prototype.splice.apply(r,O)}}}}}return r},hooks:{all:{},add:function(e,n){var a=t.hooks.all;a[e]=a[e]||[],a[e].push(n)},run:function(e,n){var a=t.hooks.all[e];if(a&&a.length)for(var r,i=0;r=a[i++];)r(n)}}},n=t.Token=function(e,t,n){this.type=e,this.content=t,this.alias=n};if(n.stringify=function(e,a,r){if("string"==typeof e)return e;if("[object Array]"==Object.prototype.toString.call(e))return e.map(function(t){return n.stringify(t,a,e)}).join("");var i={type:e.type,content:n.stringify(e.content,a,r),tag:"span",classes:["token",e.type],attributes:{},language:a,parent:r};if("comment"==i.type&&(i.attributes.spellcheck="true"),e.alias){var l="Array"===t.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(i.classes,l)}t.hooks.run("wrap",i);var o="";for(var s in i.attributes)o+=s+'="'+(i.attributes[s]||"")+'"';return"<"+i.tag+' class="'+i.classes.join(" ")+'" '+o+">"+i.content+"</"+i.tag+">"},!self.document)return self.addEventListener?(self.addEventListener("message",function(e){var n=JSON.parse(e.data),a=n.language,r=n.code;self.postMessage(JSON.stringify(t.util.encode(t.tokenize(r,t.languages[a])))),self.close()},!1),self.Prism):self.Prism;var a=document.getElementsByTagName("script");return a=a[a.length-1],a&&(t.filename=a.src,document.addEventListener&&!a.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",t.highlightAll)),self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism);
+</script>
+</body>
+
+</html>
