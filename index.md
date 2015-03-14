@@ -96,8 +96,6 @@ OSCFunc.newMatching(
 		{ arg message, time, addr, recvPort;
 			~m.ledset(message[1], message[2], message[3]);
 		}, "/monome/grid/key");
-
-});
 ```
 
 ### 2.4 Decoupled interaction
@@ -389,10 +387,10 @@ Done!
 	
 ## Credits
 
-*Processing* was written by  James McCartney and is now maintained [as a GPL project by various people](http://supercollider.sourceforge.net).
+*SuperCollider* was written by James McCartney and is now maintained [as a GPL project by various people](http://supercollider.sourceforge.net).
 
-*monom* was written by and is maintained by [Ezra Buchla](http://catfact.net).
+*monom* was originally written by Raja and is maintained by [Ezra Buchla](http://catfact.net).
 
-This tutorial was created by [Brian Crabtree](http://nnnnnnnn.org) for [monome.org](monome.org). Huge thanks to Raja Das for his very extensive [Monoming with SuperCollider Tutorial](http://monome.org/docs/dev:supercollider_tutorial).
+This tutorial was created by [Brian Crabtree](http://nnnnnnnn.org) for [monome.org](monome.org). Huge thanks to Raja for his very extensive [Monoming with SuperCollider Tutorial](http://monome.org/docs/dev:supercollider_tutorial).
 
 Contributions welcome. Submit a pull request to [github.com/monome/grid-studies-sc](https://github.com/monome/grid-studies-sc) or e-mail [info@monome.org](mailto:info@monome.org).

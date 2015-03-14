@@ -529,9 +529,7 @@ s : state (1 = key down, 0 = key up)</code></pre>
 <pre><code>OSCFunc.newMatching(
         { arg message, time, addr, recvPort;
             ~m.ledset(message[1], message[2], message[3]);
-        }, &quot;/monome/grid/key&quot;);
-
-});</code></pre>
+        }, &quot;/monome/grid/key&quot;);</code></pre>
 
 <h3 id="toc_8">2.4 Decoupled interaction</h3>
 
@@ -796,11 +794,11 @@ if(~cutting == 1,
 
 <h2 id="toc_17">Credits</h2>
 
-<p><em>Processing</em> was written by  James McCartney and is now maintained <a href="http://supercollider.sourceforge.net">as a GPL project by various people</a>.</p>
+<p><em>SuperCollider</em> was written by James McCartney and is now maintained <a href="http://supercollider.sourceforge.net">as a GPL project by various people</a>.</p>
 
-<p><em>monom</em> was written by and is maintained by <a href="http://catfact.net">Ezra Buchla</a>.</p>
+<p><em>monom</em> was originally written by Raja and is maintained by <a href="http://catfact.net">Ezra Buchla</a>.</p>
 
-<p>This tutorial was created by <a href="http://nnnnnnnn.org">Brian Crabtree</a> for <a href="monome.org">monome.org</a>. Huge thanks to Raja Das for his very extensive <a href="http://monome.org/docs/dev:supercollider_tutorial">Monoming with SuperCollider Tutorial</a>.</p>
+<p>This tutorial was created by <a href="http://nnnnnnnn.org">Brian Crabtree</a> for <a href="monome.org">monome.org</a>. Huge thanks to Raja for his very extensive <a href="http://monome.org/docs/dev:supercollider_tutorial">Monoming with SuperCollider Tutorial</a>.</p>
 
 <p>Contributions welcome. Submit a pull request to <a href="https://github.com/monome/grid-studies-sc">github.com/monome/grid-studies-sc</a> or e-mail <a href="mailto:info@monome.org">info@monome.org</a>.</p>
 
